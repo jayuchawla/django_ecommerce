@@ -2,7 +2,7 @@ from typing import Any
 from django.db import models
 
 # Create your models here.
-class Name(models.Model):
+class Category(models.Model):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self.name = models.CharField(max_length=255, db_index=True)
