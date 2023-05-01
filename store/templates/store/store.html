@@ -23,8 +23,9 @@
         <br>
         <div class="row row-cols-1 row-cols-md-5 g-4">
             {% for product in all_products %}
-            <div class="col" onclick="location.href=''" style="cursor:pointer">
+            <div class="col" style="cursor:pointer">
                 <div class="card h-100 text-bg-dark mb-3 shadow">
+                    <a class="stretched-link" href="{% url 'product_info' product.slug %}"></a>
                     <img src="{{ product.image.url }}" class="card-img-top img-fluid" alt="{{ product.title}}">
                     <div class="card-body">
                         <p class="card-text">
