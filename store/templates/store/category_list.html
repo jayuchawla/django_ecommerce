@@ -3,29 +3,17 @@
 {% load static %}
 
 {% block content %}
-<!--Intro-->
-<section class="py-4 text-center container">
-    <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h4> Simple, Slick, Secure</h4>
-            <br>
-            <p class="lead text-muted">Browse an extensive collection!</p>
-            <br>
-            <a href="#" class="btn btn-primary">Create an Account</a>
-        </div>
-    </div>
-</section>
-
 <div class="album py-5 bg-light">
     <div class="container">
-        <div class="pb-3 h5">All Products</div>
+        <div class="pb-3 h5">{{ category.name | capfirst }}</div>
         <hr>
         <br>
-        <div class="row row-cols-1 row-cols-md-5 g-4">
-            {% for product in all_products %}
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+            {% for product in products %}
             <div class="col" style="cursor:pointer">
                 <div class="card h-100 text-bg-dark mb-3 shadow">
-                    {% comment %} <a class="stretched-link" href="{% url 'product_info' product.slug %}"></a> {% endcomment %}
+                    {% comment %} <a class="stretched-link" href="{% url 'product_info' product.slug %}"></a>
+                    {% endcomment %}
                     <a class="stretched-link" href="{{ product.get_absolute_url }}"></a>
                     <img src="{{ product.image.url }}" class="card-img-top img-fluid" alt="{{ product.title}}">
                     <div class="card-body">
@@ -42,5 +30,4 @@
             {% endfor %}
         </div>
     </div>
-</div>
-{% endblock %}
+</div>{% endblock %}
