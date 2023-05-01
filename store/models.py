@@ -1,4 +1,4 @@
-from typing import Any
+from django.urls import reverse
 from django.db import models
 
 # Create your models here.
@@ -12,8 +12,12 @@ class Category(models.Model):
     
     def __str__(self) -> str:
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('category_list', args=[self.slug])
 
 class Product(models.Model):
+    category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=250)
     brand = models.CharField(max_length=250, default='un-branded')
     description = models.TextField(blank=True)
@@ -26,3 +30,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('product_info', args=[self.slug])

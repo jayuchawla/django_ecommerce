@@ -64,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'store.views.categories'  # if you are looking to get some specific data on every page, suppose user details, or menu etc. then it is hard to insert this data in each and every view you write. that is why you have context processors, you can write a simple class/function which returns a dictionary that should be merged with context of each view. now your menus and user data will be rendered seamlessly
             ],
         },
     },
@@ -121,7 +122,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Path where static files are stored
-STATICFILES_DIRS = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Base url to serve media files
 MEDIA_URL = '/media/'
