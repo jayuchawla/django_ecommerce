@@ -28,6 +28,10 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{% url 'store' %}">All</a></li>
+                                <!-- we can directly loop through all_categories (key of dict returned from views.categories) without using render and context(i.e. invoking the views.categories), given that we have append it already in context_processors in settings.py -->
+                                {% for category in all_categories %}
+                                    <li><a class="dropdown-item" href="">{{ category.name | capfirst }}</a></li>
+                                {% endfor %}
                             </ul>
                         </li>
                     </ul>
