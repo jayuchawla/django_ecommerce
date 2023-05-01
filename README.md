@@ -23,3 +23,20 @@
       {% for category in all_categories %}
         <li><a class="dropdown-item" href="">{{ category.name | capfirst }}</a></li>
       {% endfor %}
+5. Dynamic url routing:
+    - in views.category_list:
+        category_object = get_object_or_404(models.Category, slug=category_slug)
+        return render(request, 'store/category_list.html', {
+            'category': category_object,
+            'products': models.Product.objects.filter(category=category_object)
+        })
+    - reverse function:
+        - resolves url from name:
+            - path('search/<slug:category_slug>', views.category_list, name='category_list')
+        - used within get_absolute_url method in model class definition
+            - return reverse('category_list', args=[self.slug])
+    - in template:
+        {{ category.get_absolute_url }}
+
+###### NOTE: We could have easily used this for dynamic url routing: _<a class="stretched-link" href="{% url 'category_list' category.slug %}"></a>_
+###### But the above violates the DRY (Don't Repeat Yourself) principle and the whole idea of editing in one place only - which is something to strive for - we would then be required to make change in each template if the url pattern is changed in future 
